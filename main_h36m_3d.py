@@ -49,7 +49,7 @@ def main(opt):
         #            "greeting", "phoning", "posing", "purchases", "sitting",
         #            "sittingdown", "takingphoto", "waiting", "walkingdog",
         #            "walkingtogether"]
-        dataset = datasets.Datasets(opt, split=0)
+        dataset = datasets.Datasets(opt, actions=opt.actions, split=0)
         print('>>> Training dataset length: {:d}'.format(dataset.__len__()))
         data_loader = DataLoader(dataset, batch_size=opt.batch_size, shuffle=True, num_workers=0, pin_memory=True)
         valid_dataset = datasets.Datasets(opt, split=1)

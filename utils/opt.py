@@ -51,6 +51,10 @@ class Options:
         self.parser.add_argument('--test_batch_size', type=int, default=16)
         self.parser.add_argument('--is_load', dest='is_load', action='store_true',
                                  help='whether to load existing model')
+        # ===============================================================
+        #                     OoD options
+        # ===============================================================
+        self.parser.add_argument('--actions', nargs='+', type=str, default=None, help='which action to train on')
 
     def _print(self):
         print("\n==================Options=================")
@@ -67,6 +71,8 @@ class Options:
                                                           self.opt.output_n,
                                                           self.opt.kernel_size,
                                                           self.opt.dct_n)
+            if actions is not None:
+              log_name = log_name+'_OoD'
             self.opt.exp = log_name
             # do some pre-check
             ckpt = os.path.join(self.opt.ckpt, self.opt.exp)
