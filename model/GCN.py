@@ -188,11 +188,12 @@ class GCN(nn.Module):
 
         outputs = residuals + x
 
-        #VAE branch loss
-        latent_loss = torch.mean(self.KL)
-        mse = torch.pow((reconstructions_mu - x), 2)
-        gauss_log_lik = -0.5*(reconstructions_log_var + np.log(2*np.pi) + (mse/(1e-8 + torch.exp(reconstructions_log_var))))
-        neg_gauss_log_lik = -torch.mean(torch.sum(gauss_log_lik, axis=(1, 2)))
-        gen_loss = neg_gauss_log_lik + latent_loss
+        if self.variational:
+            #VAE branch loss
+            latent_loss = torch.mean(self.KL)
+            mse = torch.pow((reconstructions_mu - x), 2)
+            gauss_log_lik = -0.5*(reconstructions_log_var + np.log(2*np.pi) + (mse/(1e-8 + torch.exp(reconstructions_log_var))))
+            neg_gauss_log_lik = -torch.mean(torch.sum(gauss_log_lik, axis=(1, 2)))
+            gen_loss = neg_gauss_log_lik + latent_loss
 
         return outputs, gen_loss
