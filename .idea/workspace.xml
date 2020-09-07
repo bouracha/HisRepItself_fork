@@ -19,9 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7406131b-6f36-4661-8216-0309efd5b346" name="Default Changelist" comment="Incorporated training on single action through inout flag --actions 'walking' (or the like).">
+    <list default="true" id="7406131b-6f36-4661-8216-0309efd5b346" name="Default Changelist" comment="Incorporated VAE branch where gen_loss is calculated in the GCN module, and appeneded to an array. I think I can do this since it seems that the GCN module is only used once as a predictor AFTER the attention section conncatenates the dct variables with the appropriate weightings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_h36m_3d.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_h36m_3d.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/AttModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/AttModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/GCN.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/GCN.py" afterDir="false" />
     </list>
@@ -244,7 +243,7 @@
       <option name="presentableId" value="Default" />
       <updated>1594023448347</updated>
       <workItem from="1598710544243" duration="926000" />
-      <workItem from="1598711595586" duration="7900000" />
+      <workItem from="1598711595586" duration="8771000" />
     </task>
     <task id="LOCAL-00001" summary="Incorporated training on single action through inout flag --actions 'walking' (or the like).">
       <created>1598716291318</created>
@@ -253,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598716291318</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Incorporated VAE branch where gen_loss is calculated in the GCN module, and appeneded to an array. I think I can do this since it seems that the GCN module is only used once as a predictor AFTER the attention section conncatenates the dct variables with the appropriate weightings">
+      <created>1599500888737</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1599500888737</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +278,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Incorporated training on single action through inout flag --actions 'walking' (or the like)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Incorporated training on single action through inout flag --actions 'walking' (or the like)." />
+    <MESSAGE value="Incorporated VAE branch where gen_loss is calculated in the GCN module, and appeneded to an array. I think I can do this since it seems that the GCN module is only used once as a predictor AFTER the attention section conncatenates the dct variables with the appropriate weightings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Incorporated VAE branch where gen_loss is calculated in the GCN module, and appeneded to an array. I think I can do this since it seems that the GCN module is only used once as a predictor AFTER the attention section conncatenates the dct variables with the appropriate weightings" />
   </component>
   <component name="WindowStateProjectService">
     <state x="541" y="346" width="1071" height="679" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595204924734">
@@ -289,6 +296,10 @@
     </state>
     <state width="1846" height="538" key="DebuggerActiveHint/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1594526841701" />
     <state width="1783" height="526" key="DebuggerActiveHint/1920.0.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1594036789296" />
+    <state x="144" y="79" key="DiffContextDialog" timestamp="1599506033787">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="144" y="79" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1599506033787" />
     <state x="916" y="419" key="EnvironmentVariablesDialog" timestamp="1594213375476">
       <screen x="65" y="24" width="1855" height="1056" />
     </state>
@@ -342,10 +353,10 @@
     </state>
     <state x="2349" y="153" key="SettingsEditor/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1595203253815" />
     <state x="479" y="174" key="SettingsEditor/1920.0.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1594023902215" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1598716301761">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1599506035772">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1598716301761" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1599506035772" />
     <state width="960" height="555" key="XDebugger.FullValuePopup" timestamp="1594080330340">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

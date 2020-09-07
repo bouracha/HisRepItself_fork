@@ -86,11 +86,11 @@ class AttModel(Module):
             dct_in_tmp = torch.matmul(dct_m[:dct_n].unsqueeze(dim=0), input_gcn).transpose(1, 2)
             dct_in_tmp = torch.cat([dct_in_tmp, dct_att_tmp], dim=-1)
             dct_out_tmp, gen_loss = self.gcn(dct_in_tmp)
-            print(dct_out_tmp.shape)
-            print(gen_loss.shape)
+            #print(dct_out_tmp.shape)
+            #print(gen_loss.shape)
             out_gcn = torch.matmul(idct_m[:, :dct_n].unsqueeze(dim=0),
                                    dct_out_tmp[:, :, :dct_n].transpose(1, 2))
-            print(out_gcn.shape)
+            #print(out_gcn.shape)
             outputs.append(out_gcn.unsqueeze(2))
             gen_losses.append(gen_loss)
             if itera > 1:
