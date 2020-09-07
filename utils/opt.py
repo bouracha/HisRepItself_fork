@@ -71,7 +71,7 @@ class Options:
                                                           self.opt.output_n,
                                                           self.opt.kernel_size,
                                                           self.opt.dct_n)
-            if actions is not None:
+            if self.opt.actions is not None:
               log_name = log_name+'_OoD'
             self.opt.exp = log_name
             # do some pre-check

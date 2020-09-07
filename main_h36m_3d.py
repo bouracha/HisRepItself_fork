@@ -78,7 +78,7 @@ def main(opt):
         for epo in range(start_epoch, opt.epoch + 1):
             is_best = False
             # if epo % opt.lr_decay == 0:
-            lr_now = util.lr_decay_mine(optimizer, lr_now, 0.1 ** (1 / opt.epoch))
+            #comment out lr decay # lr_now = util.lr_decay_mine(optimizer, lr_now, 0.1 ** (1 / opt.epoch))
             print('>>> training epoch: {:d}'.format(epo))
             ret_train = run_model(net_pred, optimizer, is_train=0, data_loader=data_loader, epo=epo, opt=opt)
             print('train error: {:.3f}'.format(ret_train['m_p3d_h36']))
@@ -153,7 +153,7 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
         p3d_src = p3d_h36.clone()[:, :, dim_used]
         p3d_out_all, gen_losses = net_pred(p3d_src, input_n=in_n, output_n=out_n, itera=itera)
         #print("Main, shape of predictions returned: ", p3d_out_all.shape)
-        #print("Main, shape of gen_losses returned: ", gen_losses.shape)
+        #print("Main, shape of gen_losses returned: ", len(gen_losses))
 
         p3d_out = p3d_h36.clone()[:, in_n:in_n + out_n]
         p3d_out[:, :, dim_used] = p3d_out_all[:, seq_in:, 0]
@@ -170,7 +170,9 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
         if is_train == 0:
             loss_p3d = torch.mean(torch.norm(p3d_out_all[:, :, 0] - p3d_sup, dim=3))
             lambda_ = 0.03
-            loss_all = loss_p3d + lambda_*gen_losses
+            #print("original loss: ", loss_p3d)
+            #print("gen_loss term: ", lambda_*gen_losses[0])
+            loss_all = loss_p3d + lambda_*gen_losses[0]
             optimizer.zero_grad()
             loss_all.backward()
             nn.utils.clip_grad_norm_(list(net_pred.parameters()), max_norm=opt.max_norm)
