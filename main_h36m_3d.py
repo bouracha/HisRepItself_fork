@@ -151,7 +151,9 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
         p3d_sup = p3d_h36.clone()[:, :, dim_used][:, -out_n - seq_in:].reshape(
             [-1, seq_in + out_n, len(dim_used) // 3, 3])
         p3d_src = p3d_h36.clone()[:, :, dim_used]
-        p3d_out_all = net_pred(p3d_src, input_n=in_n, output_n=out_n, itera=itera)
+        p3d_out_all, gen_losses = net_pred(p3d_src, input_n=in_n, output_n=out_n, itera=itera)
+        #print("Main, shape of predictions returned: ", p3d_out_all.shape)
+        #print("Main, shape of gen_losses returned: ", gen_losses.shape)
 
         p3d_out = p3d_h36.clone()[:, in_n:in_n + out_n]
         p3d_out[:, :, dim_used] = p3d_out_all[:, seq_in:, 0]
@@ -161,12 +163,14 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
         p3d_h36 = p3d_h36.reshape([-1, in_n + out_n, 32, 3])
 
         p3d_out_all = p3d_out_all.reshape([batch_size, seq_in + out_n, itera, len(dim_used) // 3, 3])
+        # print("Main, shape of predictions after reshaped (just before loss): ", p3d_out_all.shape)
 
         # 2d joint loss:
         grad_norm = 0
         if is_train == 0:
             loss_p3d = torch.mean(torch.norm(p3d_out_all[:, :, 0] - p3d_sup, dim=3))
-            loss_all = loss_p3d
+            lambda_ = 0.03
+            loss_all = loss_p3d + lambda_*gen_losses
             optimizer.zero_grad()
             loss_all.backward()
             nn.utils.clip_grad_norm_(list(net_pred.parameters()), max_norm=opt.max_norm)
