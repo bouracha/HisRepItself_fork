@@ -24,7 +24,6 @@
       <change beforePath="$PROJECT_DIR$/main_h36m_3d.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_h36m_3d.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/AttModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/AttModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/GCN.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/GCN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/opt.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/opt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +244,7 @@
       <option name="presentableId" value="Default" />
       <updated>1594023448347</updated>
       <workItem from="1598710544243" duration="926000" />
-      <workItem from="1598711595586" duration="12975000" />
+      <workItem from="1598711595586" duration="17833000" />
     </task>
     <task id="LOCAL-00001" summary="Incorporated training on single action through inout flag --actions 'walking' (or the like).">
       <created>1598716291318</created>
@@ -275,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599506188710</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Incorporated VAE branch where gen_loss is calculated in the GCN module, and appeneded to an array. I think I can do this since it seems that the GCN module is only used once as a predictor AFTER the attention section conncatenates the dct variables with the appropriate weightings">
+      <created>1599522435815</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1599522435815</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,10 +375,10 @@
     </state>
     <state x="2349" y="153" key="SettingsEditor/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1595203253815" />
     <state x="479" y="174" key="SettingsEditor/1920.0.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1594023902215" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1599506240932">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1599576194154">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1599506240932" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1599576194154" />
     <state width="960" height="555" key="XDebugger.FullValuePopup" timestamp="1594080330340">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

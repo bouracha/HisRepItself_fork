@@ -134,8 +134,8 @@ class GCN(nn.Module):
             #self.decoder_gc3 = GraphConvolution(hidden_feature, hidden_feature, node_n=node_n)
             #self.decoder_bn3 = nn.BatchNorm1d(node_n * hidden_feature)
 
-            self.gc_decoder_mu = GraphConvolution(hidden_feature, input_feature, node_n=node_n)
-            self.gc_decoder_sigma = GraphConvolution(hidden_feature, input_feature, node_n=node_n)
+            self.gc_decoder_mu = GraphConvolution(hidden_feature, 50, node_n=node_n)
+            self.gc_decoder_sigma = GraphConvolution(hidden_feature, 50, node_n=node_n)
 
         self.gc7 = GraphConvolution(hidden_feature, input_feature, node_n=self.node_n)
 
@@ -144,7 +144,7 @@ class GCN(nn.Module):
         self.act_f = nn.LeakyReLU(0.1)
         self.normalised_act_f = nn.Sigmoid()
 
-    def forward(self, x):
+    def forward(self, x, whole_input):
         y = self.gc1(x)
         b, n, f = y.shape
         y = self.bn1(y.view(b, -1)).view(b, n, f)
@@ -191,7 +191,7 @@ class GCN(nn.Module):
         if self.variational:
             #VAE branch loss
             latent_loss = torch.mean(self.KL)
-            mse = torch.pow((reconstructions_mu - x), 2)
+            mse = torch.pow((reconstructions_mu - whole_inputA), 2)
             gauss_log_lik = -0.5*(reconstructions_log_var + np.log(2*np.pi) + (mse/(1e-8 + torch.exp(reconstructions_log_var))))
             neg_gauss_log_lik = -torch.mean(torch.sum(gauss_log_lik, axis=(1, 2)))
             gen_loss = neg_gauss_log_lik + latent_loss

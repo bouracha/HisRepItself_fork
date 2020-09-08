@@ -59,6 +59,8 @@ class AttModel(Module):
         dct_m, idct_m = util.get_dct_matrix(self.kernel_size + output_n)
         dct_m = torch.from_numpy(dct_m).float().cuda()
         idct_m = torch.from_numpy(idct_m).float().cuda()
+        dct_input_m = util.get_dct_matrix(input_n)
+        dct_input_m = torch.from_numpy(dct_input_m).float().cuda()
 
         vn = input_n - self.kernel_size - output_n + 1
         vl = self.kernel_size + output_n
@@ -83,9 +85,10 @@ class AttModel(Module):
                 [bs, -1, dct_n])
 
             input_gcn = src_tmp[:, idx]
+            dct_src_tmp = torch.matmul(dct_input_m.unsqueeze(dim=0), src_tmp).transpose(1, 2)
             dct_in_tmp = torch.matmul(dct_m[:dct_n].unsqueeze(dim=0), input_gcn).transpose(1, 2)
             dct_in_tmp = torch.cat([dct_in_tmp, dct_att_tmp], dim=-1)
-            dct_out_tmp, gen_loss = self.gcn(dct_in_tmp)
+            dct_out_tmp, gen_loss = self.gcn(dct_in_tmp, dct_src_tmp)
             #print(dct_out_tmp.shape)
             out_gcn = torch.matmul(idct_m[:, :dct_n].unsqueeze(dim=0),
                                    dct_out_tmp[:, :, :dct_n].transpose(1, 2))

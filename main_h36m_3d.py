@@ -116,6 +116,7 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
         net_pred.eval()
 
     l_p3d = 0
+    l_g = 0
     if is_train <= 1:
         m_p3d_h36 = 0
     else:
@@ -168,6 +169,7 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
         # 2d joint loss:
         grad_norm = 0
         if is_train == 0:
+            #print("shape of gt: ", p3d_sup.shape)
             loss_p3d = torch.mean(torch.norm(p3d_out_all[:, :, 0] - p3d_sup, dim=3))
             lambda_ = 0.03
             #print("original loss: ", loss_p3d)
@@ -179,6 +181,7 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
             optimizer.step()
             # update log values
             l_p3d += loss_p3d.cpu().data.numpy() * batch_size
+            l_g += gen_losses[0].cpu().data.numpy() * batch_size
 
         if is_train <= 1:  # if is validation or train simply output the overall mean error
             mpjpe_p3d_h36 = torch.mean(torch.norm(p3d_h36[:, in_n:in_n + out_n] - p3d_out, dim=3))
@@ -192,6 +195,7 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
     ret = {}
     if is_train == 0:
         ret["l_p3d"] = l_p3d / n
+        ret["l_g"] = l_g / n
 
     if is_train <= 1:
         ret["m_p3d_h36"] = m_p3d_h36 / n
