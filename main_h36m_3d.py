@@ -97,7 +97,7 @@ def main(opt):
             for k in ret_test.keys():
                 ret_log = np.append(ret_log, [ret_test[k]])
                 head = np.append(head, ['test_' + k])
-            log.save_csv_log(opt, head, ret_log, is_create=(epo == 1))
+            log.save_csv_log(opt, head, ret_log, is_create=(epo == 1), file_name='test_pdrop_'+str(opt.p_drop)+'_lambda_'+str(opt.lambda_))
             if ret_valid['m_p3d_h36'] < err_best:
                 err_best = ret_valid['m_p3d_h36']
                 is_best = True
