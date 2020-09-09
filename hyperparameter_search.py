@@ -23,6 +23,6 @@ def random_hyperparameters():
 
 for i in range(opt.num_trials):
     (lambda_, dropout) = random_hyperparameters()
-    command = 'python3 main_h36m_3d.py --kernel_size 10 --dct_n 20 --input_n 50 --output_n 10 --skip_rate 1 --batch_size 32 --test_batch_size 32 --in_features 66 --actions '+str(walking)+' --p_drop '+str(dropout)+' --lambda_ '+str(lambda_)
+    command = 'python3 main_h36m_3d.py --kernel_size 10 --dct_n 20 --input_n 50 --output_n 10 --skip_rate 1 --batch_size 32 --test_batch_size 32 --in_features 66 --actions '+str('walking')+' --p_drop '+str(dropout)+' --lambda_ '+str(lambda_)
     print(command)
     os.system(command)
