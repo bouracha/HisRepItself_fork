@@ -19,7 +19,7 @@ def random_hyperparameters():
     lambda_ = np.e ** (random.uniform(lambda_log_range[0], lambda_log_range[1]))
     dropout = random.uniform(dropout_range[0], dropout_range[1])
 
-    return n_z, num_decoder_stage, alpha, lambda_, dropout
+    return lambda_, dropout
 
 for i in range(opt.num_trials):
     (lambda_, dropout) = random_hyperparameters()
