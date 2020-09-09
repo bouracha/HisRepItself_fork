@@ -9,7 +9,7 @@ import torch
 
 class Datasets(Dataset):
 
-    def __init__(self, opt, actions=None, split=0):
+    def __init__(self, opt, actions=None, out_of_distribution=False, split=0):
         """
         :param path_to_data:
         :param actions:
@@ -29,13 +29,25 @@ class Datasets(Dataset):
         seq_len = self.in_n + self.out_n
         subs = np.array([[1, 6, 7, 8, 9], [11], [5]])
         # acts = data_utils.define_actions(actions)
+        acts = ["walking", "eating", "smoking", "discussion", "directions",
+                "greeting", "phoning", "posing", "purchases", "sitting",
+                "sittingdown", "takingphoto", "waiting", "walkingdog",
+                "walkingtogether"]
         if actions is None:
-            acts = ["walking", "eating", "smoking", "discussion", "directions",
-                    "greeting", "phoning", "posing", "purchases", "sitting",
-                    "sittingdown", "takingphoto", "waiting", "walkingdog",
-                    "walkingtogether"]
+            acts = acts
         else:
-            acts = actions
+            if out_of_distribution:
+                if isinstance(actions, list):
+                    OoD_actions = []
+                    for act in acts:
+                        if act not in actions:
+                            OoD_actions.append(act)
+                else:
+                    OoD_actions = [x for i, x in enumerate(acts) if x != actions]
+                acts = OoD_actions
+            else:
+                acts = actions
+        print("Returning actions: ", acts)
         # subs = np.array([[1], [11], [5]])
         # acts = ['walking']
         # 32 human3.6 joint name:

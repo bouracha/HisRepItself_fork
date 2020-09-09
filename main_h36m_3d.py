@@ -49,15 +49,15 @@ def main(opt):
         #            "greeting", "phoning", "posing", "purchases", "sitting",
         #            "sittingdown", "takingphoto", "waiting", "walkingdog",
         #            "walkingtogether"]
-        dataset = datasets.Datasets(opt, actions=opt.actions, split=0)
+        dataset = datasets.Datasets(opt, actions=opt.actions, out_of_distribution=False, split=0)
         print('>>> Training dataset length: {:d}'.format(dataset.__len__()))
         data_loader = DataLoader(dataset, batch_size=opt.batch_size, shuffle=True, num_workers=0, pin_memory=True)
-        valid_dataset = datasets.Datasets(opt, split=1)
+        valid_dataset = datasets.Datasets(opt, actions=opt.actions, out_of_distribution=True, split=1)
         print('>>> Validation dataset length: {:d}'.format(valid_dataset.__len__()))
         valid_loader = DataLoader(valid_dataset, batch_size=opt.test_batch_size, shuffle=True, num_workers=0,
                                   pin_memory=True)
 
-    test_dataset = datasets.Datasets(opt, split=2)
+    test_dataset = datasets.Datasets(opt, actions=opt.actions, out_of_distribution=True, split=2)
     print('>>> Testing dataset length: {:d}'.format(test_dataset.__len__()))
     test_loader = DataLoader(test_dataset, batch_size=opt.test_batch_size, shuffle=False, num_workers=0,
                              pin_memory=True)
