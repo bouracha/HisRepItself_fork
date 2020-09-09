@@ -59,8 +59,8 @@ class AttModel(Module):
         dct_m, idct_m = util.get_dct_matrix(self.kernel_size + output_n)
         dct_m = torch.from_numpy(dct_m).float().cuda()
         idct_m = torch.from_numpy(idct_m).float().cuda()
-        dct_input_m = util.get_dct_matrix(input_n)
-        dct_input_m = torch.from_numpy(dct_input_m).float().cuda()
+        dct_input_m, idct_input_m  = util.get_dct_matrix(input_n)
+        dct_input_m= torch.from_numpy(dct_input_m).float().cuda()
 
         vn = input_n - self.kernel_size - output_n + 1
         vl = self.kernel_size + output_n
