@@ -10,7 +10,7 @@ import numpy as np
 
 class AttModel(Module):
 
-    def __init__(self, in_features=48, kernel_size=5, d_model=512, num_stage=2, dct_n=10):
+    def __init__(self, in_features=48, kernel_size=5, d_model=512, num_stage=2, dct_n=10, p_dropout=0.3):
         super(AttModel, self).__init__()
 
         self.kernel_size = kernel_size
@@ -34,7 +34,7 @@ class AttModel(Module):
                                              bias=False),
                                    nn.ReLU())
 
-        self.gcn = GCN.GCN(input_feature=(dct_n) * 2, hidden_feature=d_model, p_dropout=0.3,
+        self.gcn = GCN.GCN(input_feature=(dct_n) * 2, hidden_feature=d_model, p_dropout=p_dropout,
                            num_stage=num_stage,
                            node_n=in_features)
 

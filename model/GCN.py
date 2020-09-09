@@ -98,7 +98,7 @@ class GCN(nn.Module):
         """
         #Hardcoded input variables for convenience:
         variational = False
-        n_z = 16
+        n_z = 32
         num_decoder_stage = 6
         #Change above for runtime
         super(GCN, self).__init__()

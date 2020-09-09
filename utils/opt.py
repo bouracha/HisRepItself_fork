@@ -55,6 +55,8 @@ class Options:
         #                     OoD options
         # ===============================================================
         self.parser.add_argument('--actions', nargs='+', type=str, default=None, help='which action to train on')
+        self.parser.add_argument('--p_drop', type=float, default=0.3, help='dropout rate (hyperparameter)')
+        self.parser.add_argument('--lambda_', type=float, default=0.03, help='lambda - weighting of VGAE branch')
 
     def _print(self):
         print("\n==================Options=================")

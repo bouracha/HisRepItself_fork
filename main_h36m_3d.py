@@ -22,7 +22,7 @@ def main(opt):
     d_model = opt.d_model
     kernel_size = opt.kernel_size
     net_pred = AttModel.AttModel(in_features=in_features, kernel_size=kernel_size, d_model=d_model,
-                                 num_stage=opt.num_stage, dct_n=opt.dct_n)
+                                 num_stage=opt.num_stage, dct_n=opt.dct_n, p_dropout=opt.p_drop)
     net_pred.cuda()
 
     optimizer = optim.Adam(filter(lambda x: x.requires_grad, net_pred.parameters()), lr=opt.lr_now)
@@ -171,7 +171,7 @@ def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt
         if is_train == 0:
             #print("shape of gt: ", p3d_sup.shape)
             loss_p3d = torch.mean(torch.norm(p3d_out_all[:, :, 0] - p3d_sup, dim=3))
-            lambda_ = 0.03
+            lambda_ = opt.lambda_
             #print("original loss: ", loss_p3d)
             #print("gen_loss term: ", lambda_*gen_losses[0])
             loss_all = loss_p3d + lambda_*gen_losses[0]
