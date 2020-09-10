@@ -97,7 +97,7 @@ class GCN(nn.Module):
         :param node_n: number of nodes in graph
         """
         #Hardcoded input variables for convenience:
-        variational = False
+        variational = True
         n_z = 32
         num_decoder_stage = 6
         #Change above for runtime
