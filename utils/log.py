@@ -21,7 +21,7 @@ def save_csv_log(opt, head, value, is_create=False, file_name='test'):
             df.to_csv(f, header=False, index=False)
 
 
-def save_ckpt(state, is_best=True, file_name=['ckpt_best.pth.tar', 'ckpt_last.pth.tar'], opt=None):
+def save_ckpt(state, is_best=True, file_name=['ckpt_best_pdrop_'+str(opt.p_drop)+'_lambda_'+str(opt.lambda_)+'.pth.tar', 'ckpt_last.pth.tar'], opt=None):
     file_path = os.path.join(opt.ckpt, file_name[1])
     torch.save(state, file_path)
     if is_best:
