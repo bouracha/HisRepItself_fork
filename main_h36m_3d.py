@@ -106,7 +106,7 @@ def main(opt):
                            'err': ret_valid['m_p3d_h36'],
                            'state_dict': net_pred.state_dict(),
                            'optimizer': optimizer.state_dict()},
-                          is_best=is_best, opt=opt)
+                          is_best=is_best, file_name=['ckpt_best_pdrop_'+str(opt.p_drop)+'_lambda_'+str(opt.lambda_)+'.pth.tar', 'ckpt_last.pth.tar'], opt=opt)
 
 
 def run_model(net_pred, optimizer=None, is_train=0, data_loader=None, epo=1, opt=None):
